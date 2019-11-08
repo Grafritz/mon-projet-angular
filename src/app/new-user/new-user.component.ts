@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { User } from '../models/User.model';
@@ -41,6 +41,13 @@ export class NewUserComponent implements OnInit {
     );
     this.userService.addUser(newUser);
     this.router.navigate(['/users']);
+  }
+  getHobbies() {
+    return this.userForm.get('hobbies') as FormArray;
+  }
+  onAddHobby() {
+    const newHobbyControl = this.formBuilder.control('', Validators.required);
+    this.getHobbies().push(newHobbyControl);
   }
 
 }
