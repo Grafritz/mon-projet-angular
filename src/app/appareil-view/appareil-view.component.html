@@ -1,0 +1,26 @@
+<div class="col-sm-12">
+    <h2>Mes Appareils ({{ appareils.length }}) </h2>
+    <p>Mis a jour : <b>{{ lastUpdate | date: 'short' }}</b></p>
+        <p>Mis a jour : <b>{{ lastUpdate | date: 'EEEE dd MMMM yyyy' | uppercase }}</b></p>
+    <p>Mis a jour Async : <b>{{ lastUpdateAsync | async | date: 'EEEE dd MMMM yyyy' | uppercase }}</b></p>
+    <button class="btn btn-primary" (click)="getPageEdit()">Nouvel Appareil</button>
+    <ul class="list-group">
+        <app-appareil  *ngFor="let appareil of appareils; let i = index"
+                [appareilIndex]="i"
+                [appareilName]="appareil.name"
+                [appareilStatus]="appareil.status"
+                [appareilId]="appareil.id"></app-appareil>
+        <!--         
+        <app-appareil [appareilName]="appareilOne"  [appareilStatus]="'éteint'"></app-appareil>
+        <app-appareil [appareilName]="appareilTwo" [appareilStatus]="'allumé'"></app-appareil>
+        <app-appareil [appareilName]="appareilThree" [appareilStatus]="'éteint'"></app-appareil>
+        -->
+        </ul>
+    <!-- *ngIf="getAction('success')" -->
+    <button class="btn btn-success"
+    [disabled]="!isAuth" (click)="onAllumer()">Tout allumer</button>
+    
+    <!-- *ngIf="getAction('danger')" -->
+    <button class="btn btn-danger" 
+    (click)="onEteindre()" >Tout Eteindre</button>
+</div>
