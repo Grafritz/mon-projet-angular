@@ -1,6 +1,9 @@
 import { Subject } from 'rxjs/Subject';
+import { HttpClient } from '@angular/common/http';
 
 export class AppareilService {
+
+  constructor( private httpClient: HttpClient ) {}
 
   appareilSubject =  new Subject<any[]>();
   private appareils = [
@@ -70,5 +73,7 @@ export class AppareilService {
     this.appareils.push(appareilObj);
 
     this.emitAppareilSubject();
+  }
+  addAppareilToServeur() {]
   }
 }
