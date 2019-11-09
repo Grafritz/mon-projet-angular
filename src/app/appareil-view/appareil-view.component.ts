@@ -62,4 +62,10 @@ ngOnInit() {
   getPageEdit() {
     this.router.navigate(['/edit']);
   }
+  onSave() {
+    this.appareilService.addAppareilToServeur();
+  }
+  onFetch() {
+    this.appareilService.getAppareilsFormServeur();
+  }
 }

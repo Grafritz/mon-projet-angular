@@ -16,11 +16,17 @@
         <app-appareil [appareilName]="appareilThree" [appareilStatus]="'éteint'"></app-appareil>
         -->
         </ul>
-    <!-- *ngIf="getAction('success')" -->
+    
+    <button class="btn btn-info" 
+    (click)="onSave()" >Enregistrer</button>
+
+    <button class="btn btn-primary" 
+    (click)="onFetch()" >Charger</button>
+
     <button class="btn btn-success"
     [disabled]="!isAuth" (click)="onAllumer()">Tout allumer</button>
     
-    <!-- *ngIf="getAction('danger')" -->
     <button class="btn btn-danger" 
     (click)="onEteindre()" >Tout Eteindre</button>
+
 </div>

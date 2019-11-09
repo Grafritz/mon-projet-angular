@@ -1,13 +1,17 @@
 import { Subject } from 'rxjs/Subject';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class AppareilService {
 
-  constructor( private httpClient: HttpClient ) {}
+  urlRealTimeDataBase = 'https://projettest-firebase.firebaseio.com/';
+  appareilDataBase = 'appareils.json';
+  urlAppareilDB = this.urlRealTimeDataBase + this.appareilDataBase;
 
   appareilSubject =  new Subject<any[]>();
   private appareils = [
-      {
+      /*{
         id: 1,
         name: 'Machine à laver',
         status: 'éteint'
@@ -26,8 +30,10 @@ export class AppareilService {
         id: 4,
         name: 'Laptop / Tablette',
         status: 'allumé'
-      }
+      }*/
     ];
+
+  constructor( private httpClient: HttpClient ) {}
 
     emitAppareilSubject() {
       this.appareilSubject.next(this.appareils.slice());
@@ -74,6 +80,41 @@ export class AppareilService {
 
     this.emitAppareilSubject();
   }
-  addAppareilToServeur() {]
+  addAppareilToServeur() {
+    this.httpClient
+    .put(this.urlAppareilDB, this.appareils)
+    .subscribe(
+      () => {
+        console.log('Enregistrement termine!');
+      },
+      (erreur) => {
+        console.log('Erreur de sauvegarde !' + erreur);
+      }
+    );
+  }
+  postAppareilToServeur() {
+    this.httpClient
+    .post(this.urlAppareilDB, this.appareils)
+    .subscribe(
+      () => {
+        console.log('Enregistrement termine!');
+      },
+      (erreur) => {
+        console.log('Erreur de sauvegarde !' + erreur);
+      }
+    );
+  }
+  getAppareilsFormServeur() {
+    this.httpClient
+    .get<any[]>(this.urlAppareilDB)
+    .subscribe(
+      (reponse) => {
+        this.appareils = reponse;
+        this.emitAppareilSubject();
+      },
+      (erreur) => {
+        console.log('Erreur de chargement! ' + erreur);
+      }
+    );
   }
 }

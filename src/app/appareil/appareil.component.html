@@ -2,7 +2,7 @@
                 'list-group-item-success': appareilStatus === 'allumé',
                 'list-group-item-danger': appareilStatus === 'éteint'}"> 
 
-    <h4 [ngStyle]="{color: getColor()}">{{ appareilId }}.- {{ appareilName }} ({{ getStatut() }})</h4>
+    <h4 [ngStyle]="{color: getColor()}">{{ appareilId }}.- {{ appareilName }} <span class="pull-right" style="font-size:9px;">({{ getStatut() }})</span></h4>
     <div style="height:2px;background-color:red;" *ngIf="appareilStatus === 'éteint'"></div>   
     <input type="text" class="form-control" [(ngModel)]="appareilName">
 
